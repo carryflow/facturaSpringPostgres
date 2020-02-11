@@ -4,6 +4,8 @@ import java.util.List;
 //import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.zabud.factura.app.dominio.model.Factura;
@@ -49,6 +51,12 @@ public class FacturaAdapter implements FacturaService {
 		//System.out.println(id.getValue());
 		// TODO Auto-generated method stub
 		return facturaMapper.transformarDtoParaDominio(facturaRepository.findById(id.getValue()).orElseThrow(()-> new RegistroNoEncontradoException()));
+	}
+
+	@Override
+	public Page<Factura> facturasPaginadas(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return facturaMapper.transformarPageDtoParaDominio(facturaRepository.findAll(pageable));
 	}
 	
 	

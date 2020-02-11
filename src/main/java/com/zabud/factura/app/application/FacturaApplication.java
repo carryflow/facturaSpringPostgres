@@ -2,6 +2,9 @@ package com.zabud.factura.app.application;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.zabud.factura.app.dominio.model.Factura;
 import com.zabud.factura.app.dominio.services.FacturaService;
 import com.zabud.factura.app.dominio.services.ProductService;
@@ -96,6 +99,12 @@ public class FacturaApplication {
 //funcion para eliminar factura por ID
 	public void deleteByid(Long id) {
 		facturaService.deleteById(new Id(id));
+	}
+	
+//función para listar facturas paginadas
+	public Page<FacturaRestDto> facturasPaginadas(Pageable pageable){
+		return facturaMapper.apitransformarPageDominioParaDto(facturaService.facturasPaginadas(pageable));
+		
 	}
 
 }
